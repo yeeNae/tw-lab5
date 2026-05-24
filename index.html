@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lab5</title>
+    <script type="module" crossorigin src="/assets/index-RLQIwGH4.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DG2wDLw5.css">
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="text-2xl font-bold">Obliczanie wieku</h1>
+
+      <label for="birthday-picker">Wybierz datę urodzenia</label>
+      <input id="birthday-picker" type="date" />
+      <button type="button" id="calculate-age" class="bg-blue-300 p-4 rounded hover:bg-blue-400">Oblicz wiek</button>
+    </div>
+
+    <dialog id="age-dialog" class="bg-gray-200">
+      <button id="close-dialog" aria-label="Zamknij dialog">×</button>
+      <p id="age-message" class="text-red-600"></p>
+    </dialog>
+  </body>
+</html>
