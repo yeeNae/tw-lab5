@@ -19,15 +19,38 @@ if (calculateBtn) {
     }
 
     const birthday = dayjs(value)
-    const daysPassed = dayjs().diff(birthday, 'days')
-    let message = `Od Twojej daty urodzenia minęło ${daysPassed} dni.`
+    const today = dayjs().startOf('day')
 
-    if (daysPassed === 0) {
-      message = `Wszystkiego najlepszego! Dziś masz urodziny! ${message}`
+    const daysPassed = today.diff(birthday.startOf('day'), 'days')
+
+    const month = birthday.format('MM')
+    const day = birthday.format('DD')
+    let nextBirthday = dayjs(`${today.year()}-${month}-${day}`).startOf('day')
+    if (nextBirthday.diff(today, 'days') < 0) {
+      nextBirthday = nextBirthday.add(1, 'year')
+    }
+
+    const daysUntil = nextBirthday.diff(today, 'days')
+    const weeksRemaining = Math.floor(daysUntil / 7)
+
+    const parts = []
+
+    if (daysUntil === 0) {
+      parts.push('Wszystkiego najlepszego!')
+    } else {
+      parts.push(`Od Twojej daty urodzenia minęło ${daysPassed} dni.`)
+    }
+
+    if (daysUntil !== 0) {
+      if (weeksRemaining === 0) {
+        parts.push('Masz urodziny w tym tygodniu!')
+      } else {
+        parts.push(`Pozostało ${weeksRemaining} tygodni do następnych urodzin.`)
+      }
     }
 
     if (ageMessage) {
-      ageMessage.textContent = message
+      ageMessage.innerHTML = parts.join('<br/>')
     }
 
     if (ageDialog) {
